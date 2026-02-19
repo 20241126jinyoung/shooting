@@ -83,7 +83,43 @@
     .partner-form .note {
       margin:8px 0 0; font-size:11px; opacity:.78; color:#afc4e6;
     }
+    .comments-panel {
+      position:fixed; left:18px; top:18px; width:min(320px,calc(100vw - 36px));
+      padding:14px; border-radius:12px;
+      background:
+        linear-gradient(180deg,rgba(13,24,49,.92),rgba(6,12,24,.92)),
+        repeating-linear-gradient(90deg,rgba(156,230,255,.04) 0 1px,transparent 1px 12px);
+      border:1px solid rgba(156,230,255,.35);
+      box-shadow:0 14px 34px rgba(0,0,0,.35),0 0 0 1px rgba(156,230,255,.16) inset;
+      backdrop-filter:blur(3px);
+      overflow:hidden;
+      max-height:min(560px,calc(100vh - 36px));
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .comments-panel::before {
+      content:"PILOT CHAT";
+      display:block; margin:-14px -14px 8px; padding:7px 10px;
+      border-bottom:1px solid rgba(156,230,255,.35);
+      background:linear-gradient(90deg,rgba(156,230,255,.18),rgba(156,230,255,.04));
+      color:#d6f1ff; font-size:11px; letter-spacing:.08em; font-weight:700;
+    }
+    .comments-panel h2 {
+      margin:0; font-size:14px; color:#f1f8ff;
+    }
+    #disqus_thread {
+      flex:1;
+      overflow:auto;
+      background:rgba(6,12,24,.55);
+      border:1px solid rgba(156,230,255,.22);
+      border-radius:8px;
+      padding:6px;
+    }
     @media (max-width: 900px) {
+      .comments-panel {
+        top:12px; left:12px; right:12px; width:auto; max-height:42vh;
+      }
       .partner-form {
         top:auto; bottom:12px; right:12px; left:12px; width:auto;
       }
@@ -91,6 +127,12 @@
   </style>
 </head>
 <body>
+  <section class="comments-panel">
+    <h2>댓글</h2>
+    <div id="disqus_thread"></div>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </section>
+
   <form class="partner-form" action="https://formspree.io/f/xykdprqy" method="POST">
     <h2>제휴 문의</h2>
     <input type="hidden" name="_subject" value="신규 제휴 문의" />
@@ -1324,6 +1366,18 @@
 
     resetGame();
     requestAnimationFrame(loop);
+  </script>
+  <script>
+    var disqus_config = function () {
+      this.page.url = window.location.href;
+      this.page.identifier = window.location.pathname || "shooting-home";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "https://shooting-1.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
   </script>
 </body>
 </html>
