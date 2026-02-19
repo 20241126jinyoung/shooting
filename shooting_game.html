@@ -30,9 +30,82 @@
       border:1px solid rgba(87,242,194,.25); font-size:13px; text-align:center; line-height:1.35;
     }
     .key { color:var(--warn); }
+    .partner-form {
+      position:fixed; right:18px; top:18px; width:min(320px,calc(100vw - 36px));
+      padding:14px; border-radius:12px;
+      background:
+        linear-gradient(180deg,rgba(16,30,56,.92),rgba(6,12,24,.92)),
+        repeating-linear-gradient(90deg,rgba(87,242,194,.04) 0 1px,transparent 1px 12px);
+      border:1px solid rgba(87,242,194,.35);
+      box-shadow:0 14px 34px rgba(0,0,0,.35),0 0 0 1px rgba(87,242,194,.18) inset;
+      backdrop-filter:blur(3px);
+      overflow:hidden;
+    }
+    .partner-form::before {
+      content:"PARTNERSHIP LINK";
+      display:block; margin:-14px -14px 12px; padding:7px 10px;
+      border-bottom:1px solid rgba(87,242,194,.35);
+      background:linear-gradient(90deg,rgba(87,242,194,.18),rgba(87,242,194,.04));
+      color:#a8ffe6; font-size:11px; letter-spacing:.08em; font-weight:700;
+    }
+    .partner-form h2 {
+      margin:0 0 10px; font-size:14px; color:#f1fffa; text-shadow:0 0 8px rgba(87,242,194,.25);
+    }
+    .partner-form label {
+      display:block; margin:8px 0 4px; font-size:12px; opacity:.9; color:#9cd7ff;
+    }
+    .partner-form input,
+    .partner-form textarea {
+      width:100%; border-radius:8px; padding:8px 10px;
+      border:1px solid rgba(87,242,194,.3);
+      background:linear-gradient(180deg,#101d39,#0a1429); color:var(--fg);
+      font:13px Consolas,Monaco,"Courier New",monospace;
+      outline:none; transition:border-color .15s ease, box-shadow .15s ease;
+    }
+    .partner-form input:focus,
+    .partner-form textarea:focus {
+      border-color:rgba(87,242,194,.85);
+      box-shadow:0 0 0 2px rgba(87,242,194,.2), 0 0 14px rgba(87,242,194,.18);
+    }
+    .partner-form textarea { resize:vertical; min-height:88px; }
+    .partner-form button {
+      margin-top:10px; width:100%;
+      border:1px solid rgba(87,242,194,.65);
+      background:linear-gradient(180deg,#1f4f58,#15303b);
+      color:#e8fff8; font-weight:700; letter-spacing:.02em;
+      text-shadow:0 0 8px rgba(87,242,194,.25);
+      box-shadow:0 8px 20px rgba(0,0,0,.3),0 0 14px rgba(87,242,194,.14) inset;
+    }
+    .partner-form button:hover {
+      border-color:rgba(87,242,194,.95);
+      filter:brightness(1.05);
+    }
+    .partner-form .note {
+      margin:8px 0 0; font-size:11px; opacity:.78; color:#afc4e6;
+    }
+    @media (max-width: 900px) {
+      .partner-form {
+        top:auto; bottom:12px; right:12px; left:12px; width:auto;
+      }
+    }
   </style>
 </head>
 <body>
+  <form class="partner-form" action="https://formspree.io/f/xykdprqy" method="POST">
+    <h2>제휴 문의</h2>
+    <input type="hidden" name="_subject" value="신규 제휴 문의" />
+    <label for="company">회사/브랜드명</label>
+    <input id="company" name="company" type="text" required />
+    <label for="name">담당자명</label>
+    <input id="name" name="name" type="text" required />
+    <label for="email">이메일</label>
+    <input id="email" name="email" type="email" required />
+    <label for="message">문의 내용</label>
+    <textarea id="message" name="message" required></textarea>
+    <button type="submit">문의 보내기</button>
+    <p class="note">제출 시 Formspree로 전송됩니다.</p>
+  </form>
+
   <div class="wrap">
     <canvas id="game" width="480" height="720"></canvas>
     <div class="controls">
